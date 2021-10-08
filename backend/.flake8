@@ -1,0 +1,3 @@
+[flake8]
+ignore = settings.py E501
+         */migrations/* E501
