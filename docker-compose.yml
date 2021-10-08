@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  backend:
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    command: python backend/src/manage.py runserver 0.0.0.0:8000
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/app
+    environment:
+      SECRET_KEY: 5a83898f7b41ae679f13a4b580776854
+      ENVIRONMENT: development
+      DATABASE_NAME: postgres
+      DATABASE_USER: postgres
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+
+  postgres:
+    image: postgres:alpine
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
