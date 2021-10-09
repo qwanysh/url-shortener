@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Shortening(models.Model):
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True)
     target_url = models.URLField()
     created_at = models.DateTimeField(auto_now=True)
 
