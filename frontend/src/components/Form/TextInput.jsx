@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
-const TextInput = ({className, placeholder, autoFocus}) => (
+const TextInput = ({className, placeholder, autoFocus, onInput, value}) => (
   <input className={className} type='text' placeholder={placeholder}
-         autoFocus={autoFocus}/>
+         autoFocus={autoFocus} onInput={onInput} value={value}
+         spellCheck={false}/>
 );
 
 export default styled(TextInput)`
