@@ -6,7 +6,7 @@ const ShorteningCard = ({className, shortening}) => {
       <div className='inner'>
         <a className='target-url' target='_blank'
            href={shortening.target_url}>{shortening.target_url}</a>
-        <span className='timespan'>{shortening.created_at}</span>
+        <span className='timespan'>{shortening.created_at.substr(0, 10)}</span>
       </div>
       <a className='short-url' target='_blank'
          href={shortening.short_url}>{shortening.short_url}</a>
