@@ -33,6 +33,7 @@ services:
       DATABASE_USER: postgres
       DATABASE_HOST: postgres
       DATABASE_PORT: 5432
+      REDIS_URL: redis://redis:6379
     ports:
       - '8000:8000'
 
@@ -40,3 +41,6 @@ services:
     image: postgres:alpine
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
+
+  redis:
+    image: redis:alpine
