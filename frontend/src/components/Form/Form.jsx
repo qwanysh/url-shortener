@@ -4,11 +4,13 @@ import TextInput from './TextInput';
 import Button from './Button';
 import {createShortening} from '../../utils';
 
-const Form = ({className}) => {
+const Form = ({className, onCreate}) => {
   const [targetUrl, setTargetUrl] = useState('');
 
   const handleClick = async () => {
-    await createShortening(targetUrl);
+    const shortening = await createShortening(targetUrl);
+    onCreate(shortening);
+    setTargetUrl('');
   };
 
   return (

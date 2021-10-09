@@ -14,6 +14,7 @@ export default styled(TextInput)`
   border-radius: 12px;
   transition: 0.2s;
   margin-bottom: 20px;
+  background: white;
 
   @media (min-width: 600px) {
     padding-right: 126px;
