@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
-const Button = ({className, children, disabled}) => (
-  <button className={className} disabled={disabled}>{children}</button>
+const Button = ({className, children, disabled, onClick}) => (
+  <button className={className} disabled={disabled}
+          onClick={onClick}>{children}</button>
 );
 
 export default styled(Button)`

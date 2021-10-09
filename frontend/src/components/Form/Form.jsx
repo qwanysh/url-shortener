@@ -2,14 +2,20 @@ import {useState} from 'react';
 import styled from 'styled-components';
 import TextInput from './TextInput';
 import Button from './Button';
+import {createShortening} from '../../utils';
 
 const Form = ({className}) => {
-  const [url, setUrl] = useState('');
+  const [targetUrl, setTargetUrl] = useState('');
+
+  const handleClick = async () => {
+    await createShortening(targetUrl);
+  };
+
   return (
     <div className={className}>
-      <TextInput placeholder='Paste long url' autoFocus value={url}
-                 onInput={(event) => setUrl(event.target.value)}/>
-      <Button disabled={!url}>Shorten</Button>
+      <TextInput placeholder='Paste long url' autoFocus value={targetUrl}
+                 onInput={(event) => setTargetUrl(event.target.value)}/>
+      <Button disabled={!targetUrl} onClick={handleClick}>Shorten</Button>
     </div>
   );
 };
