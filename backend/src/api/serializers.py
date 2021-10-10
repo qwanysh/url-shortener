@@ -6,6 +6,7 @@ from shortenings.models import Shortening
 
 
 class ShorteningSerializer(serializers.ModelSerializer):
+    author_id = serializers.UUIDField(required=False)
     slug = serializers.SlugField(required=False, write_only=True)
     short_url = serializers.SerializerMethodField()
 
@@ -21,4 +22,5 @@ class ShorteningSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Shortening
-        fields = 'id', 'slug', 'target_url', 'created_at', 'short_url'
+        fields = ('id', 'author_id', 'slug', 'target_url', 'created_at',
+                  'short_url')
