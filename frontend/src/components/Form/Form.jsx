@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import styled from 'styled-components';
 import TextInput from './TextInput';
 import Button from './Button';
@@ -14,8 +14,8 @@ const Form = ({className, onCreate, authorId}) => {
   };
 
   const handleClick = async () => {
-    const shortening = await createShortening({authorId, ...newShortening});
-    onCreate(shortening);
+    await createShortening({authorId, ...newShortening});
+    onCreate();
     setNewShortening(initialShortening);
     setCustomSlug(false);
   };

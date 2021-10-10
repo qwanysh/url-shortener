@@ -15,16 +15,20 @@ const App = () => {
   const [authorId, setAuthorId] = useState(null);
   const [shortenings, setShortenings] = useState([]);
 
-  useEffect(async () => {
-    const _authorId = getAuthorIdFromLocalStorage();
-    const [_shortenings, hasPrev, hasNext] = await getShortenings(pagination.currentPage, _authorId);
-    setAuthorId(_authorId);
+  const _updateShortenings = async () => {
+    const [_shortenings, hasPrev, hasNext] = await getShortenings(pagination.currentPage, authorId);
     setShortenings(_shortenings);
     setPagination({...pagination, hasPrev, hasNext});
+  };
+
+  useEffect(async () => {
+    const _authorId = getAuthorIdFromLocalStorage();
+    setAuthorId(_authorId);
+    await _updateShortenings();
   }, [pagination.currentPage]);
 
-  const handleCreate = (shortening) => {
-    setShortenings([shortening, ...shortenings]);
+  const handleCreate = async () => {
+    await _updateShortenings();
   };
 
   const handlePageChange = (direction) => {
