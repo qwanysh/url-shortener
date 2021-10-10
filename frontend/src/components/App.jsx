@@ -4,13 +4,16 @@ import CenteredLayout from './CenteredLayout/CenteredLayout';
 import Form from './Form/Form';
 import ShorteningList from './ShorteningList/ShorteningList';
 import '../assets/reset.css';
-import {getShortenings} from '../utils';
+import {getAuthorIdFromLocalStorage, getShortenings} from '../utils';
 
 const App = () => {
+  const [authorId, setAuthorId] = useState(null);
   const [shortenings, setShortenings] = useState([]);
 
   useEffect(async () => {
-    setShortenings(await getShortenings());
+    const _authorId = getAuthorIdFromLocalStorage();
+    setAuthorId(_authorId);
+    setShortenings(await getShortenings(_authorId));
   }, []);
 
   const handleCreate = (shortening) => {
@@ -21,7 +24,7 @@ const App = () => {
     <>
       <GlobalStyle/>
       <CenteredLayout>
-        <Form onCreate={handleCreate}/>
+        <Form onCreate={handleCreate} authorId={authorId}/>
         {shortenings.length !== 0 && (
           <ShorteningList shortenings={shortenings}/>
         )}

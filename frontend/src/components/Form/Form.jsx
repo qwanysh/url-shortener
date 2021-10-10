@@ -1,10 +1,10 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import TextInput from './TextInput';
 import Button from './Button';
 import {createShortening} from '../../utils';
 
-const Form = ({className, onCreate}) => {
+const Form = ({className, onCreate, authorId}) => {
   const [customSlug, setCustomSlug] = useState(false);
   const initialShortening = {targetUrl: '', slug: ''};
   const [newShortening, setNewShortening] = useState(initialShortening);
@@ -14,7 +14,7 @@ const Form = ({className, onCreate}) => {
   };
 
   const handleClick = async () => {
-    const shortening = await createShortening(newShortening);
+    const shortening = await createShortening({authorId, ...newShortening});
     onCreate(shortening);
     setNewShortening(initialShortening);
     setCustomSlug(false);
