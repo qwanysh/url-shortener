@@ -22,15 +22,16 @@ const Form = ({className, onCreate, authorId}) => {
 
   return (
     <div className={className}>
-      <div className='top-inner'>
+      <div className={`${className}__top-inner`}>
         <TextInput placeholder='Paste long url' autoFocus
                    value={newShortening.targetUrl} name='targetUrl'
                    onInput={event => handleChange(event)}/>
         <Button disabled={!newShortening.targetUrl}
                 onClick={handleClick}>Shorten</Button>
       </div>
-      <div className='middle-inner'>
-        <button className='button' onClick={() => setCustomSlug(!customSlug)}>
+      <div className={`${className}__middle-inner`}>
+        <button className={`${className}__button`}
+                onClick={() => setCustomSlug(!customSlug)}>
           {customSlug ? 'Use random slug' : 'Set custom slug'}
         </button>
       </div>
@@ -48,7 +49,7 @@ export default styled(Form)`
   grid-template-columns: 1fr;
   grid-gap: 10px;
 
-  & .top-inner {
+  &__top-inner {
     display: flex;
     flex-direction: column;
 
@@ -59,12 +60,12 @@ export default styled(Form)`
     }
   }
 
-  & .middle-inner {
+  &__middle-inner {
     display: flex;
     justify-content: center; 
   }
 
-  & .button {
+  &__button {
     font-size: 12px;
     color: #7e889f;
     padding: 0;

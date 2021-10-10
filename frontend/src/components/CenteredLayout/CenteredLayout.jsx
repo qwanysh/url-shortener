@@ -3,7 +3,7 @@ import Container from './Container';
 
 const CenteredLayout = ({className, children}) => (
   <div className={className}>
-    <div>
+    <div className={`${className}__inner`}>
       <Container>
         {children}
       </Container>
@@ -16,4 +16,8 @@ export default styled(CenteredLayout)`
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  &__inner {
+    padding: 20px 0;
+  }
 `;

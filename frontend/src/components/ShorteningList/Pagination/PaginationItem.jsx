@@ -20,10 +20,10 @@ export default styled(PaginationItem)`
   padding: 10px;
   background: white;
   border-radius: ${({direction}) => {
-    if (direction) {
-      return directions[direction].borderStyles;
-    }
-    return '0';
+    return direction ? directions[direction].borderStyles : '0';
+  }};
+  flex-grow: ${({direction}) => {
+    return direction ? '0' : '1';
   }};
   cursor: pointer;
   font-size: 12px;
@@ -42,5 +42,9 @@ export default styled(PaginationItem)`
   &:disabled {
     cursor: default;
     color: #7e889f;
+  }
+  
+  @media (min-width: 600px) {
+    flex-grow: 0;
   }
 `;
