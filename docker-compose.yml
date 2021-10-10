@@ -22,7 +22,7 @@ services:
     depends_on:
       - postgres
       - redis
-    command: python src/manage.py runserver 0.0.0.0:8000
+    command: python manage.py runserver 0.0.0.0:8000
     stdin_open: true
     tty: true
     volumes:
@@ -37,6 +37,26 @@ services:
       REDIS_URL: redis://redis:6379
     ports:
       - '8000:8000'
+
+  celery:
+    build:
+      context: backend
+    depends_on:
+      - postgres
+      - redis
+    command: celery -A core worker -l INFO
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./backend:/app
+    environment:
+      SECRET_KEY: 5a83898f7b41ae679f13a4b580776854
+      ENVIRONMENT: development
+      DATABASE_NAME: postgres
+      DATABASE_USER: postgres
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      REDIS_URL: redis://redis:6379
 
   postgres:
     image: postgres:alpine

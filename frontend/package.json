@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --clearScreen=false",
     "build": "vite build",
     "serve": "vite preview"
   },

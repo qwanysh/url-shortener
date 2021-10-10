@@ -9,3 +9,4 @@ RUN pipenv install --system --deploy --ignore-pipfile --dev
 
 USER app
 COPY . .
+WORKDIR /app/src

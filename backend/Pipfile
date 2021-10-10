@@ -10,6 +10,7 @@ psycopg2-binary = "*"
 django-cors-headers = "*"
 redis = "*"
 django-filter = "*"
+celery = "*"
 
 [dev-packages]
 pytest = "*"
