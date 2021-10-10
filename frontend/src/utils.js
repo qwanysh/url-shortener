@@ -13,13 +13,14 @@ export const createShortening = async ({authorId, slug, targetUrl}) => {
   return response.data;
 };
 
-export const getShortenings = async (authorId = null) => {
-  let url = '/shortenings/';
+export const getShortenings = async (page, authorId = null) => {
+  let url = `/shortenings/?page=${page}`;
   if (authorId) {
-    url = `${url}?author_id=${authorId}`;
+    url = `${url}&author_id=${authorId}`;
   }
   const response = await axios.get(url);
-  return response.data.results;
+  const data = response.data;
+  return [data.results, !!data.previous, !!data.next];
 };
 
 export const generateUUID = () => {

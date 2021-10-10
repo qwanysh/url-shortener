@@ -26,8 +26,4 @@ export default styled(TextInput)`
     box-shadow: 1px 2px 8px rgba(17, 17, 17, 0.15);
     border-color: transparent;
   }
-  
-  &:focus {
-    outline: none;
-  }
 `;
