@@ -9,8 +9,11 @@ export const createShortening = async ({authorId, slug, targetUrl}) => {
   if (authorId) {
     data['author_id'] = authorId;
   }
-  const response = await axios.post('/shortenings/', data);
-  return response.data;
+  try {
+    await axios.post('/shortenings/', data);
+  } catch (error) {
+    return error.response.data;
+  }
 };
 
 export const getShortenings = async (page, authorId = null) => {

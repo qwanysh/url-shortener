@@ -1,3 +1,4 @@
+from django.db import IntegrityError
 from django.urls import reverse
 from rest_framework import serializers
 
@@ -19,7 +20,12 @@ class ShorteningSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         if not validated_data.get('slug'):
             validated_data['slug'] = Shortening.generate_unique_slug()
-        return Shortening.objects.create(**validated_data)
+        try:
+            return Shortening.objects.create(**validated_data)
+        except IntegrityError:
+            raise serializers.ValidationError({
+                'slug': ['Slug already exists', 'test'],
+            })
 
     class Meta:
         model = Shortening

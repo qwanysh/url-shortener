@@ -17,8 +17,7 @@ export default styled(Button)`
 
   @media (min-width: 600px) {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 6px;
     right: 6px;
   }
 

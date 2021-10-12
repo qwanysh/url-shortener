@@ -4,27 +4,38 @@ import TextInput from './TextInput';
 import Button from './Button';
 import {createShortening} from '../../utils';
 
+const initialShortening = {targetUrl: '', slug: ''};
+const initialErrors = {'target_url': [], slug: []};
+
 const Form = ({className, onCreate, authorId}) => {
   const [customSlug, setCustomSlug] = useState(false);
-  const initialShortening = {targetUrl: '', slug: ''};
   const [newShortening, setNewShortening] = useState(initialShortening);
+  const [errors, setErrors] = useState(initialErrors);
 
   const handleChange = ({target}) => {
     setNewShortening({...newShortening, [target.name]: target.value});
   };
 
   const handleClick = async () => {
-    await createShortening({authorId, ...newShortening});
+    const _errors = await createShortening({authorId, ...newShortening});
+
+    if (_errors) {
+      setErrors({...errors, ..._errors});
+      return;
+    }
+
     onCreate();
     setNewShortening(initialShortening);
     setCustomSlug(false);
+    setErrors(initialErrors);
   };
 
   return (
     <div className={className}>
       <div className={`${className}__top-inner`}>
-        <TextInput placeholder='Paste long url' autoFocus
-                   value={newShortening.targetUrl} name='targetUrl'
+        <TextInput placeholder='Paste long url' autoFocus name='targetUrl'
+                   errors={errors['target_url']}
+                   value={newShortening.targetUrl}
                    onInput={event => handleChange(event)}/>
         <Button disabled={!newShortening.targetUrl}
                 onClick={handleClick}>Shorten</Button>
@@ -36,8 +47,8 @@ const Form = ({className, onCreate, authorId}) => {
         </button>
       </div>
       {customSlug && (
-        <TextInput placeholder='Enter custom slug' autoFocus
-                   value={newShortening.slug} name='slug'
+        <TextInput placeholder='Enter custom slug' autoFocus name='slug'
+                   errors={errors.slug} value={newShortening.slug}
                    onInput={event => handleChange(event)}/>
       )}
     </div>
