@@ -1,5 +1,6 @@
 import random
 import string
+from datetime import datetime, timedelta
 from typing import Optional
 
 from rest_framework.request import Request
@@ -24,3 +25,7 @@ def cache_shortening(slug: str, target_url: str):
 def get_cached_target_url(slug: str) -> Optional[str]:
     if target_url := redis_client.get(slug):
         return target_url.decode()
+
+
+def get_expiration_date(created_at: datetime) -> datetime:
+    return created_at + timedelta(seconds=consts.SHORTENING_TTL)

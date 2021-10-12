@@ -5,4 +5,6 @@ from shortenings import models
 
 @admin.register(models.Shortening)
 class ShorteningAdmin(admin.ModelAdmin):
-    pass
+    list_display = (
+        'author_id', 'slug', 'target_url', 'created_at', 'expires_at',
+    )

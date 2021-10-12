@@ -1,6 +1,7 @@
-from api import paginations, serializers
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import mixins, viewsets
+
+from api import paginations, serializers
 from shortenings.models import Shortening
 
 
