@@ -44,7 +44,7 @@ services:
     depends_on:
       - postgres
       - redis
-    command: celery -A core worker -l INFO
+    command: celery -A core worker -B -l INFO
     stdin_open: true
     tty: true
     volumes:
