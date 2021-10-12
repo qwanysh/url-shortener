@@ -9,6 +9,7 @@ class ShorteningSerializer(serializers.ModelSerializer):
     author_id = serializers.UUIDField(required=False)
     slug = serializers.SlugField(required=False, write_only=True)
     short_url = serializers.SerializerMethodField()
+    target_url = serializers.URLField()
 
     def get_short_url(self, obj):
         base_address = utils.get_app_base_address(self.context['request'])

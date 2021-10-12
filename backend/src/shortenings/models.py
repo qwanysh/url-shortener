@@ -6,7 +6,7 @@ from shortenings import utils
 class Shortening(models.Model):
     author_id = models.UUIDField(null=True, blank=True)
     slug = models.SlugField(unique=True)
-    target_url = models.URLField()
+    target_url = models.TextField()
     created_at = models.DateTimeField(auto_now=True)
     expires_at = models.DateTimeField(null=True, blank=True)
 
